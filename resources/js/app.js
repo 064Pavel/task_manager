@@ -1,7 +1,11 @@
 import './bootstrap';
 
-import {createApp} from 'vue'
+import {createApp} from "vue/dist/vue.esm-bundler";
+import App from "../views/vue-components/App.vue"
+import router from './router'
 
-import App from '../views/vue-components/App.vue'
+const app = createApp(App)
 
-createApp(App).mount("#app")
+app.use(router)
+
+app.mount('#app')
