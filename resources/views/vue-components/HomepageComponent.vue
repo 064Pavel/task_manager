@@ -3,18 +3,19 @@
         <div class="flex flex-row justify-around">
             <div><h1 class="text-white text-4xl">Task Manager</h1></div>
             <div>
-                <button class="bg-white hover:bg-gray-200 text-red-500 font-bold py-2 px-8 rounded-2xl">Sign In</button>
+                <router-link :to="{name: 'login'}"><button class="bg-white hover:bg-gray-200 text-red-500 font-bold py-2 px-8 rounded-2xl">Sign In</button></router-link>
             </div>
         </div>
     </div>
 
     <div class="container mx-auto px-10 grid gap-y-3 text-base overflow-y-scroll h-[800px]">
 
-        <div class="p-5 flex flex-row justify-between text-white text-start">
+        <div class="p-5 flex flex-row justify-between text-white text-start relative right-4">
             <div class="justify-self-center bg-red-100 p-3">
                 <img
                     class="h-[200px] w-[200px]"
-                    src="../../../public/img/hourglass-svgrepo-com.svg">
+                    src="../../../public/img/folder-data-storage-svgrepo-com.svg">
+
             </div>
             <div class="bg-red-500 p-3 w-[200px]">
                 <p> Task Manager gives you confidence that everything is organized and taken into account so
@@ -25,7 +26,7 @@
 
         </div>
 
-        <div class="p-5 flex flex-row justify-between text-white text-start">
+        <div class="p-5 flex flex-row justify-between text-white text-start relative left-4">
             <div class="bg-red-500 p-3 w-[200px]">
                 <p>
                     Get a clear idea of everything that needs to be done, and do not lose sight of important tasks.
@@ -39,11 +40,11 @@
         </div>
 
 
-        <div class="p-5 flex flex-row justify-between text-white text-start">
+        <div class="p-5 flex flex-row justify-between text-white text-start relative right-4">
             <div class="justify-self-center bg-red-100 p-3">
                 <img
                     class="h-[200px] w-[200px]"
-                    src="../../../public/img/folder-data-storage-svgrepo-com.svg">
+                    src="../../../public/img/hourglass-svgrepo-com.svg">
             </div>
             <div class="bg-red-500 p-3 w-[200px]">
                 <p>
@@ -54,7 +55,7 @@
             </div>
         </div>
 
-        <div class="p-5 flex flex-row justify-between text-white text-start mb-5">
+        <div class="p-5 flex flex-row justify-between text-white text-start mb-5 relative left-4">
             <div class="bg-red-500 p-3 w-[200px]">
                 <p>
                     Visualizing productivity
