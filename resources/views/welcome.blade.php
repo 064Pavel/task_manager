@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Task Manager</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -12,8 +12,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     </head>
-    <body>
-        <div id="app" class="flex-auto bg-blue-200 text-9xl w-100">
+    <body class="bg-gray-300 flex flex-row justify-center ">
+        <div id="app" class="absolute top-10 m-auto]">
             <App></App>
         </div>
     </body>

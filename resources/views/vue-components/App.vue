@@ -1,7 +1,7 @@
 <template>
-    <p class="text-center text-red-800"> From Vue App</p>
-    <router-view></router-view>
-    <router-link to="/test2">CLICK</router-link>
+    <div class="bg-white w-[500px] h-[900px]">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
