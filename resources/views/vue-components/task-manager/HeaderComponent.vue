@@ -17,8 +17,8 @@
         </div>
 
         <div class="flex flex-col">
-            <div class="mb-2"><h1 class="text-3xl text-white">Hello admin!</h1></div>
-            <div ><p class="bg-white p-1 w-auto">You have 5 new task today</p></div>
+            <div class="mb-2"><h1 class="text-3xl text-white">Hello {{user_name}}!</h1></div>
+            <div><p class="bg-white p-1 w-auto">You have 5 new task today</p></div>
         </div>
     </div>
 </template>
@@ -29,6 +29,16 @@ import router from "../../../js/router";
 export default {
     name: "HeaderComponent",
 
+    data() {
+        return {
+            user_name: '',
+        }
+    },
+
+    mounted() {
+        this.getUserName()
+    },
+
     methods: {
         signOut() {
             axios.post('/logout')
@@ -37,6 +47,15 @@ export default {
                     router.push({name: 'homepage'})
                 })
         },
+
+        getUserName() {
+            axios.get('/api/user')
+                .then(response => {
+                    this.user_name = response.data.name
+                }).catch(err => {
+                console.log(err);
+            })
+        }
     }
 }
 </script>

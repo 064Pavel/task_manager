@@ -10,7 +10,7 @@
                     src="../../../../public/img/coffee-mug-svgrepo-com.svg">
             </div>
 
-            <div class="relative top-8 mt-5">Free time</div>
+            <div class="relative top-8 mt-5 text-2xl">Free time</div>
         </div>
 
     </div>

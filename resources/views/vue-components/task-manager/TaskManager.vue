@@ -4,7 +4,7 @@
 
     <div class="container cursor-pointer justify-items-center mx-auto p-10 grid grid-cols-2 gap-8 ">
         <CategoriesComponent></CategoriesComponent>
-        <AddCategoryComponent></AddCategoryComponent>
+        <AddTaskComponent></AddTaskComponent>
     </div>
 
 </template>
@@ -12,7 +12,7 @@
 <script>
 import HeaderComponent from "./HeaderComponent.vue";
 import CategoriesComponent from "./CategoriesComponent.vue";
-import AddCategoryComponent from "./AddCategoryComponent.vue";
+import AddTaskComponent from "./AddTaskComponent.vue";
 
 
 export default {
@@ -21,7 +21,7 @@ export default {
     components: {
         CategoriesComponent,
         HeaderComponent,
-        AddCategoryComponent
+        AddTaskComponent
     },
 
 
