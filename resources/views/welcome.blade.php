@@ -12,9 +12,9 @@
 
 </head>
 
-<body class="bg-gray-300 flex flex-row justify-center ">
+<body class="bg-yellow-300 flex flex-row justify-center ">
 
-<div id="app" class="absolute top-10 m-auto]">
+<div id="app" class="absolute top-10 m-auto shadow-2xl shadow-black 500/50">
     <App></App>
 </div>
 
