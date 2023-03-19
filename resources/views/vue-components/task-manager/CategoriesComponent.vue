@@ -1,16 +1,17 @@
 <template>
 
-    <div class=" bg-white w-[9rem] h-[12rem] shadow shadow-gray-400 text-center">
+    <div v-for="category in categories" class=" bg-white w-[9rem] h-[12rem] shadow shadow-gray-400 text-center">
 
         <div class="flex flex-col">
 
-            <div class="relative top-10 left-1/4 w-[4rem] h-[4rem] shadow shadow-gray-100 border-2 border-white rounded-full">
+            <div
+                class="relative top-10 left-1/4 w-[4rem] h-[4rem] shadow shadow-gray-100 border-2 border-white rounded-full">
                 <img
-                    class="w-12 items-center relative left-1.5"
-                    src="../../../../public/img/coffee-mug-svgrepo-com.svg">
+                    class="w-12 items-center relative left-1.5 hover:bottom-1.5 delay-1000"
+                    :src="getImgUrl(category.path_to_icon)">
             </div>
 
-            <div class="relative top-8 mt-5 text-2xl">Free time</div>
+            <div class="relative top-8 mt-5 text-2xl">{{category.name}}</div>
         </div>
 
     </div>
@@ -18,10 +19,36 @@
 </template>
 
 <script>
-import router from "../../../js/router";
 
 export default {
     name: "CategoriesComponent",
+
+    data() {
+        return {
+            categories: []
+        }
+    },
+
+    mounted() {
+        this.getCategories()
+    },
+
+    methods: {
+        getCategories() {
+            axios.get('/api/task-manager/categories')
+                .then(response => {
+                    this.categories = response.data.data
+                }).catch(err => {
+                console.log(err);
+            })
+        },
+
+        getImgUrl(pic) {
+            return new URL(`../../../../public/img/${pic}`, import.meta.url).href
+        }
+
+
+    },
 
 
 }

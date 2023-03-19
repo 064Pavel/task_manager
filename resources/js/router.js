@@ -24,6 +24,11 @@ const router = createRouter({
             name: 'task-manager',
             component: () => import('../views/vue-components/task-manager/TaskManager.vue')
         },
+        {
+            path: '/tasks/create',
+            name: 'tasks.create',
+            component: () => import('../views/vue-components/task-manager/task/CreateComponent.vue')
+        },
     ]
 })
 
