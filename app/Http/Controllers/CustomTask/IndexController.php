@@ -12,7 +12,11 @@ class IndexController extends Controller
 {
     public function index($id)
     {
-        $tasks = Task::where('user_id', Auth::id())->where('category_id', $id)->get();
+        $tasks = Task::where('user_id', Auth::id())
+                            ->where('category_id', $id)
+                            ->where('is_completed', false)
+                            ->get();
+
         return TaskResource::collection($tasks);
 
     }

@@ -34,13 +34,14 @@
                 </div>
                 <div>
                     <img
+                        @click.prevent="deleteTask(task.id)"
                         class="w-10"
                         src="../../../../../public/img/delete-svgrepo-com.svg">
                 </div>
             </div>
 
             <div class="flex flex-row relative top-10 left-4">
-                <button class="bg-green-500 w-[80px] h-[30px] mr-2">Done</button>
+                <button @click.prevent="completed(task.id)" class="bg-green-500 w-[80px] h-[30px] mr-2">Done</button>
                 <button class="bg-indigo-500 w-[80px] h-[30px]">More</button>
             </div>
         </div>
@@ -110,6 +111,22 @@ export default {
             return new URL(`../../../../../public/img/${pic}`, import.meta.url).href
         },
 
+        deleteTask(id){
+            axios.delete(`/api/tasks/${id}`)
+                .then(response => {
+                    this.getTasks(this.category_id)
+                }).catch(err => console.log(err))
+        },
+
+        completed(id){
+            axios.patch(`/api/tasks/completed/${id}`)
+                .then(response => {
+                    console.log(response);
+                    this.getTasks(this.category_id)
+                }).catch(err => {
+                console.log(err);
+            })
+        }
     }
 }
 </script>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Category\GetCategoryController;
 use App\Http\Controllers\Category\IndexController;
+use App\Http\Controllers\CustomTask\ChangeIsCompletedController;
 use App\Http\Controllers\Task\TaskController;
 use App\Http\Controllers\TaskInfo\GetCountTaskCategoryController;
 use App\Http\Controllers\TaskInfo\GetCountTasksTodayController;
@@ -41,4 +42,5 @@ Route::prefix('task-info')->middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tasks/category/{id}', [\App\Http\Controllers\CustomTask\IndexController::class, 'index']);
     Route::get('/category/{id}', GetCategoryController::class);
+    Route::patch('/tasks/completed/{id}', ChangeIsCompletedController::class);
 });
