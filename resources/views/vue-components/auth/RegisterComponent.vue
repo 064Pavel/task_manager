@@ -74,7 +74,7 @@ export default {
                 })
                     .then(res => {
                         localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
-                        router.push({name: 'task-manager'})
+                        router.push({name: 'profile'})
                         console.log("You are register");
                         console.log(res);
                     })

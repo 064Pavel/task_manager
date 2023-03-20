@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col bg-red-500 w-[500px] h-[900px] p-6 text-white">
 
-        <router-link :to="{name: 'task-manager'}">
+        <router-link :to="{name: 'profile'}">
             <div><span class="text-6xl cursor-pointer">&lt;</span></div>
         </router-link>
 
@@ -44,9 +44,9 @@
             <template v-for="category in categories">
                 <div
                     @click="setCategory(category.id)"
-                    class="w-[8rem] h-[10rem] bg-white cursor-pointer"
+                    class="w-[8rem] h-[10rem] bg-white cursor-pointer "
                     :class="isChoose(category.id) ? 'border-4 border-black' : '' ">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col ">
 
                         <div
                             class="relative top-10 left-1/4 w-[4rem] h-[4rem] shadow shadow-gray-100 border-2 border-white rounded-full">
@@ -67,8 +67,10 @@
         </div>
 
         <div class="m-auto relative top-34">
-            <button @click.prevent="create" class="bg-white text-red-500 p-3 w-[300px]"><span><span
-                class="text-2xl">+</span> ADD TASK</span></button>
+            <router-link :to="{name: 'profile'}">
+                <button @click.prevent="create" class="bg-white text-red-500 p-3 w-[300px]"><span><span
+                    class="text-2xl">+</span> ADD TASK</span></button>
+            </router-link>
         </div>
     </div>
 

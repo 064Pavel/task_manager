@@ -19,15 +19,24 @@ const router = createRouter({
             name: 'register',
             component: () => import('../views/vue-components/auth/RegisterComponent.vue')
         },
+
         {
-            path: '/task-manager',
-            name: 'task-manager',
-            component: () => import('../views/vue-components/task-manager/TaskManager.vue')
+            path: '/profile',
+            name: 'profile',
+            component: () => import('../views/vue-components/task-manager/ProfileComponent.vue'),
+        },
+        {
+            path: '/tasks/category/:category_id',
+            name: 'tasks.index',
+            props: true,
+            component: () => import('../views/vue-components/task-manager/task/IndexComponent.vue'),
         },
         {
             path: '/tasks/create',
             name: 'tasks.create',
+            props: true,
             component: () => import('../views/vue-components/task-manager/task/CreateComponent.vue')
+
         },
     ]
 })
@@ -36,8 +45,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x_xsrf_token')
 
-    if (!token){
-        if (to.name === 'login' || to.name === 'register' || to.name === 'homepage'){
+    if (!token) {
+        if (to.name === 'login' || to.name === 'register' || to.name === 'homepage') {
             return next()
         } else {
             return next({
@@ -46,9 +55,9 @@ router.beforeEach((to, from, next) => {
         }
     }
 
-    if (to.name === 'login' || to.name === 'register' || to.name === 'homepage' && token){
+    if (to.name === 'login' || to.name === 'register' || to.name === 'homepage' && token) {
         return next({
-            name: 'task-manager'
+            name: 'profile'
         })
     }
 

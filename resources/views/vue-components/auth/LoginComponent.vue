@@ -63,7 +63,7 @@ export default {
                     .then(response => {
                         console.log(response);
                         localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
-                        router.push({name: 'task-manager'})
+                        router.push({name: 'profile'})
                         // console.log("You are sign in");
                         // console.log(response);
                     }).catch(err => {
