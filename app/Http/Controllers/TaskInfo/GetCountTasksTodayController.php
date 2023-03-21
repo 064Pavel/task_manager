@@ -12,7 +12,10 @@ class GetCountTasksTodayController extends Controller
 {
     public function __invoke()
     {
-        $count_tasks_today = Task::where('user_id', Auth::id())->where('deadline', today())->count();
+        $count_tasks_today = Task::where('user_id', Auth::id())
+            ->where('deadline', today())
+            ->where('is_completed', false)
+            ->count();
         return $count_tasks_today;
     }
 

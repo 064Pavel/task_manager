@@ -4,7 +4,6 @@ namespace App\Http\Controllers\CustomTask;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
-use Illuminate\Support\Facades\DB;
 
 class ChangeIsCompletedController extends Controller
 {

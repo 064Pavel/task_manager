@@ -41,6 +41,7 @@ Route::prefix('task-info')->middleware('auth:sanctum')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tasks/category/{id}', [\App\Http\Controllers\CustomTask\IndexController::class, 'index']);
+    Route::get('/tasks/{id}/show', [\App\Http\Controllers\CustomTask\ShowController::class, 'show']);
     Route::get('/category/{id}', GetCategoryController::class);
     Route::patch('/tasks/completed/{id}', ChangeIsCompletedController::class);
 });

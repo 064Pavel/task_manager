@@ -12,6 +12,8 @@ class GetCountTaskCategoryController extends Controller
 {
     public function __invoke($id)
     {
-        return Task::where('user_id', Auth::id())->where('category_id', $id)->count();
+        return Task::where('user_id', Auth::id())
+            ->where('category_id', $id)
+            ->count();
     }
 }

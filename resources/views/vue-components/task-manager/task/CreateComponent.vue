@@ -67,10 +67,10 @@
         </div>
 
         <div class="m-auto relative top-34">
-            <router-link :to="{name: 'profile'}">
-                <button @click.prevent="create" class="bg-white text-red-500 p-3 w-[300px]"><span><span
-                    class="text-2xl">+</span> ADD TASK</span></button>
-            </router-link>
+
+            <button @click.prevent="create" class="bg-white text-red-500 p-3 w-[300px]"><span><span
+                class="text-2xl">+</span> ADD TASK</span></button>
+
         </div>
     </div>
 
@@ -78,6 +78,8 @@
 
 <script>
 
+
+import router from "../../../../js/router";
 
 export default {
     name: "CreateComponent",
@@ -101,9 +103,14 @@ export default {
 
     methods: {
         create() {
-            axios.post('/api/tasks', {name: this.name, deadline: this.deadline, category_id: this.category_id, user_id: this.user_id})
+            axios.post('/api/tasks', {
+                name: this.name,
+                deadline: this.deadline,
+                category_id: this.category_id,
+                user_id: this.user_id
+            })
                 .then(response => {
-                    console.log(response);
+                    router.push({name: "profile"})
                 }).catch(err => {
                 console.log(err);
             })
