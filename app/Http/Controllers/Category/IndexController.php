@@ -13,6 +13,6 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-         return CategoryResource::collection(Category::all());
+         return CategoryResource::collection(Category::orderBy('id')->get());
     }
 }

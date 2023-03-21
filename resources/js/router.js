@@ -42,7 +42,7 @@ const router = createRouter({
             path: '/category/:category_id/tasks/:task_id',
             name: 'tasks.show',
             props: true,
-            component: () => import('../views/vue-components/task-manager/task/ShowComponent.vue')
+            component: () => import('../views/vue-components/task-manager/task/EditComponent.vue')
 
         },
 

@@ -28,9 +28,11 @@
 
             <div class="grid grid-cols-2 justify-between w-[100px]">
                 <div>
-                    <img
-                        class="w-10"
-                        src="../../../../../public/img/edit-svgrepo-com.svg">
+                    <router-link :to="{ name: 'tasks.show', params: { task_id: task.id, category_id: category_id }}">
+                        <img
+                            class="w-10"
+                            src="../../../../../public/img/edit-svgrepo-com.svg">
+                    </router-link>
                 </div>
                 <div>
                     <img
@@ -45,11 +47,9 @@
 
             <div class="flex flex-row relative top-10 left-16">
                 <button @click.prevent="completed(task.id)" class="bg-green-500 w-[80px] h-[30px] mr-2">Done</button>
-                <router-link :to="{ name: 'tasks.show', params: { task_id: task.id, category_id: category_id }}">
                     <button class="bg-indigo-500 w-[80px] h-[30px]">More</button>
-                </router-link>
                 <button
-                    class="w-[120px] h-[30px] bg-red-500 relative left-44 rounded-2xl text-white"
+                    class="w-[120px] h-[30px] bg-red-500 relative left-40 rounded-2xl text-white"
                 >{{ task.priority_id.name }}
                 </button>
             </div>
@@ -142,7 +142,6 @@ export default {
         },
 
         getClass() {
-
             return {
                 'bg-white': this.task.priority_id === 1,
                 'bg-green-500': this.task.priority_id === 2,
@@ -150,9 +149,9 @@ export default {
                 'bg-red-500': this.task.priority_id === 4,
 
             }
+        },
 
 
-        }
     }
 }
 </script>

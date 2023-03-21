@@ -13,6 +13,7 @@
                 </div>
 
                 <div class="relative top-8 mt-5 text-2xl">{{ category.name }}</div>
+                <div class="relative top-8 mt-1 text-xl text-red-500">Tasks: {{count[category.id-1]}}</div>
 
             </div>
         </router-link>
@@ -38,6 +39,7 @@ export default {
     },
 
     mounted() {
+        this.getCountTasksCategory()
         this.getCategories()
     },
 
@@ -56,19 +58,17 @@ export default {
             return new URL(`../../../../public/img/${pic}`, import.meta.url).href
         },
 
+        getCountTasksCategory() {
 
-    },
-
-    computed:{
-        getCountTasksCategory(id) {
-
-            axios.get(`/api/task-info/count_tasks_category/${id}`)
+            axios.get(`/api/task-info/count_tasks_category`)
                 .then(response => {
-                    console.log(response);
+                    this.count = response.data;
                 })
 
         }
-    }
+
+
+    },
 
 
 

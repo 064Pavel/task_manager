@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('task-info')->middleware('auth:sanctum')->group(function () {
     Route::get('/count_tasks_today', GetCountTasksTodayController::class);
-    Route::get('/count_tasks_category/{id}', GetCountTaskCategoryController::class);
+    Route::get('/count_tasks_category', GetCountTaskCategoryController::class);
 });
 
 
@@ -44,4 +44,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tasks/{id}/show', [\App\Http\Controllers\CustomTask\ShowController::class, 'show']);
     Route::get('/category/{id}', GetCategoryController::class);
     Route::patch('/tasks/completed/{id}', ChangeIsCompletedController::class);
+    Route::get('/priorities', \App\Http\Controllers\Priority\IndexController::class);
 });

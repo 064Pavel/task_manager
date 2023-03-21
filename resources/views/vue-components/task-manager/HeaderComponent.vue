@@ -5,7 +5,7 @@
 
             <div>
                 <img
-                    src="../../../../public/img/user-svgrepo-com.svg"
+                    :src="getAvatarUrl(path_to_avatar)"
                     class="w-16 border-4 border-white rounded-full">
             </div>
 
@@ -36,12 +36,13 @@ export default {
     data() {
         return {
             user_name: '',
-            tasks_today: null
+            tasks_today: null,
+            path_to_avatar: null
         }
     },
 
     mounted() {
-        this.getUserName()
+        this.getUser()
         this.getTasksToday()
     },
 
@@ -54,10 +55,11 @@ export default {
                 })
         },
 
-        getUserName() {
+        getUser() {
             axios.get('/api/user')
                 .then(response => {
                     this.user_name = response.data.name
+                    this.path_to_avatar = response.data.path_to_avatar
                 }).catch(err => {
                 console.log(err);
             })
@@ -68,7 +70,12 @@ export default {
                 .then(response => {
                     this.tasks_today = response.data
                 })
-        }
+        },
+
+        getAvatarUrl(pic) {
+            return new URL(`../../../../public/img/${pic}`, import.meta.url).href
+        },
+
     }
 }
 </script>
