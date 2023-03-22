@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('priority_id')->default(1)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
 
+            $table->text('notes')->nullable();
             $table->date('deadline')->default(today());
             $table->boolean('is_completed')->default(false);
 

@@ -23,6 +23,7 @@ class StoreRequest extends FormRequest
     {
         return [
             "name" => '',
+            "notes" => '',
             "category_id" => '',
             "priority_id" => '',
             "user_id" => '',

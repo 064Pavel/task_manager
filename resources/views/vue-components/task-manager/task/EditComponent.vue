@@ -44,6 +44,7 @@
             <div class="flex justify-center">
                 <div class="relative mb-3 xl:w-96" data-te-input-wrapper-init>
     <textarea
+        v-model="notes"
         class="bg-white text-black peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
         id="exampleFormControlTextarea1"
         rows="3"
@@ -79,6 +80,7 @@
 
 <script>
 import axios from "axios";
+import router from "../../../../js/router";
 
 export default {
     name: "ShowComponent",
@@ -94,6 +96,7 @@ export default {
             category_path_to_icon: '',
 
             name: '',
+            notes: '',
             deadline: null,
             priority_id: null,
         }
@@ -111,19 +114,28 @@ export default {
 
         update(id){
 
-            if (this.task.name === null){
+            if (this.name === ''){
                 this.name = this.task.name
+            }
+
+            if (this.deadline === null){
+                this.deadline = this.task.deadline
+            }
+
+            if (this.priority_id === null){
+                this.priority_id = 1
             }
 
             axios.patch(`/api/tasks/${id}`, {
                 name: this.name,
+                notes: this.notes,
                 deadline: this.deadline,
                 category_id: this.category_id,
                 priority_id: this.priority_id,
                 user_id: 1
             })
                 .then(response => {
-                    console.log(response);
+                  router.push({name: "tasks.index", params: {category_id : this.category_id}})
                 }).catch(err => {
                 console.log(err);
             })

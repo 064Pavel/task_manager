@@ -22,9 +22,10 @@
 
     <div class="mt-12 grid gap-10 overflow-y-auto h-[620px]">
         <div v-for="task in tasks"
-             class="bg-gray-200 w-[450px] h-[120px] mx-auto p-3 grid grid-cols-3 justify-items-center shadow-2xl">
+             class="bg-gray-200  w-[450px] h-[120px] mx-auto p-3 grid grid-cols-3 justify-items-center shadow-2xl">
             <div class="w-[130px]  truncate"><span>Task: <br> {{ task.name }}</span></div>
             <div><span>Deadline: <br> {{ task.deadline }}</span></div>
+
 
             <div class="grid grid-cols-2 justify-between w-[100px]">
                 <div>
@@ -40,19 +41,38 @@
                         class="w-10"
                         src="../../../../../public/img/delete-svgrepo-com.svg">
                 </div>
-<!--                <div class="relative top-10 left-6 w-[100px] text-center">-->
-<!--                    Priority:-->
-<!--                </div>-->
+
             </div>
 
-            <div class="flex flex-row relative top-10 left-16">
+            <div class="flex flex-row ml-72 mt-12">
                 <button @click.prevent="completed(task.id)" class="bg-green-500 w-[80px] h-[30px] mr-2">Done</button>
-                    <button class="bg-indigo-500 w-[80px] h-[30px]">More</button>
+                <button @click.prevent="toggleShow(task.id)" class="bg-indigo-500 w-[80px] h-[30px]">More</button>
                 <button
-                    class="w-[120px] h-[30px] bg-red-500 relative left-40 rounded-2xl text-white"
+                    class="w-[120px] h-[30px] ml-36 bg-red-500 left-40 rounded-2xl text-white"
                 >{{ task.priority_id.name }}
                 </button>
             </div>
+
+            <div
+                :class="changeInfoTaskId(task.id) ? '' : 'hidden'"
+                class="modal z-auto h-[900px] w-[500px] fixed left-50 top-10 flex justify-center items-center bg-black bg-opacity-50 mx-auto">
+                <!-- modal -->
+                <div class="bg-white relative z-0 rounded shadow-lg w-[300px] h-[500px]">
+                    <!-- modal header -->
+                    <div class="border-b px-4 py-2 flex justify-between items-center">
+                        <h3 class="font-semibold text-lg">Notes:</h3>
+                        <button @click.prevent="close" class="text-black close-modal">&cross;</button>
+                    </div>
+                    <!-- modal body -->
+                    <div v-if="task.notes != null" class="p-3 text-black">
+                        {{task.notes}}
+                    </div>
+                    <div v-else class="p-3 text-black">
+                        This task does not have notes, you can create them.
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -80,7 +100,9 @@ export default {
             category: [],
 
             category_name: '',
-            category_path_to_icon: ''
+            category_path_to_icon: '',
+
+            infoTaskId: null
         }
     },
 
@@ -114,7 +136,7 @@ export default {
             axios.get(`/api/tasks/category/${id}`)
                 .then(response => {
                     this.tasks = response.data.data
-                    console.log(response.data.data);
+                    console.log(response);
                 }).catch(err => {
                 console.log(err);
             })
@@ -139,6 +161,18 @@ export default {
                 }).catch(err => {
                 console.log(err);
             })
+        },
+
+        changeInfoTaskId(id) {
+            return this.infoTaskId === id
+        },
+
+        toggleShow(id) {
+            this.infoTaskId = id
+        },
+
+        close(){
+          this.infoTaskId = null
         },
 
         getClass() {
