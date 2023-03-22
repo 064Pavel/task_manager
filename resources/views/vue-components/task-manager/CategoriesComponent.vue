@@ -45,7 +45,7 @@ export default {
 
     methods: {
         getCategories() {
-            axios.get('/api/task-manager/categories')
+            axios.get('/api/categories')
                 .then(response => {
                     this.categories = response.data.data
                     console.log(response);
@@ -60,7 +60,7 @@ export default {
 
         getCountTasksCategory() {
 
-            axios.get(`/api/task-info/count_tasks_category`)
+            axios.get(`/api/tasks/info/quantity_by_category`)
                 .then(response => {
                     this.count = response.data;
                 })

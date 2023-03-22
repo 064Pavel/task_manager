@@ -117,7 +117,7 @@ export default {
         },
 
         getCategories() {
-            axios.get('/api/task-manager/categories')
+            axios.get('/api/categories')
                 .then(response => {
                     this.categories = response.data.data
                 }).catch(err => {

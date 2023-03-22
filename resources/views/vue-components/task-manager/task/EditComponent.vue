@@ -144,7 +144,7 @@ export default {
 
         getTask(id) {
             console.log(id);
-            axios.get(`/api/tasks/${id}/show`)
+            axios.get(`/api/tasks/${id}`)
                 .then(response => {
                     this.task = response.data.data;
                 }).catch(err => {

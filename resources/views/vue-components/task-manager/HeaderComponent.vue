@@ -66,7 +66,7 @@ export default {
         },
 
         getTasksToday(){
-            axios.get('/api/task-info/count_tasks_today')
+            axios.get('/api/tasks/info/quantity_today')
                 .then(response => {
                     this.tasks_today = response.data
                 })

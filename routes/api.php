@@ -1,11 +1,9 @@
 <?php
 
 use App\Http\Controllers\Category\GetCategoryController;
-use App\Http\Controllers\Category\IndexController;
-use App\Http\Controllers\CustomTask\ChangeIsCompletedController;
-use App\Http\Controllers\Task\TaskController;
-use App\Http\Controllers\TaskInfo\GetCountTaskCategoryController;
-use App\Http\Controllers\TaskInfo\GetCountTasksTodayController;
+use App\Http\Controllers\Task\AnotherActions\GetCountTaskCategoryController;
+use App\Http\Controllers\Task\AnotherActions\GetCountTasksTodayController;
+use App\Http\Controllers\Task\AnotherActions\TaskCompletedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,24 +23,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::prefix('task-manager')->middleware('auth:sanctum')->group(function () {
-    Route::get('/categories', IndexController::class);
-});
-
 Route::middleware('auth:sanctum')->group(function () {
-    Route::resource('tasks', TaskController::class);
-});
-
-Route::prefix('task-info')->middleware('auth:sanctum')->group(function () {
-    Route::get('/count_tasks_today', GetCountTasksTodayController::class);
-    Route::get('/count_tasks_category', GetCountTaskCategoryController::class);
-});
-
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/tasks/category/{id}', [\App\Http\Controllers\CustomTask\IndexController::class, 'index']);
-    Route::get('/tasks/{id}/show', [\App\Http\Controllers\CustomTask\ShowController::class, 'show']);
+    Route::get('/categories', \App\Http\Controllers\Category\IndexController::class);
     Route::get('/category/{id}', GetCategoryController::class);
-    Route::patch('/tasks/completed/{id}', ChangeIsCompletedController::class);
-    Route::get('/priorities', \App\Http\Controllers\Priority\IndexController::class);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+   Route::get('/priorities', \App\Http\Controllers\Priority\IndexController::class);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/category/{id}/tasks', [\App\Http\Controllers\Task\IndexController::class, 'index']);
+    Route::post('/tasks', [\App\Http\Controllers\Task\StoreController::class, 'store']);
+    Route::get('/tasks/{id}', [\App\Http\Controllers\Task\ShowController::class, 'show']);
+    Route::patch('/tasks/{id}', [\App\Http\Controllers\Task\UpdateController::class, 'update']);
+    Route::delete('/tasks/{id}', [\App\Http\Controllers\Task\DestroyController::class, 'destroy']);
+    Route::patch('/tasks/completed/{id}', TaskCompletedController::class);
+
+});
+
+Route::prefix('tasks/info')->middleware('auth:sanctum')->group(function () {
+    Route::get('/quantity_today', GetCountTasksTodayController::class);
+    Route::get('/quantity_by_category', GetCountTaskCategoryController::class);
+
+});
+

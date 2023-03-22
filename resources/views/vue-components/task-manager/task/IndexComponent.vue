@@ -133,7 +133,7 @@ export default {
 
 
         getTasks(id) {
-            axios.get(`/api/tasks/category/${id}`)
+            axios.get(`/api/category/${id}/tasks`)
                 .then(response => {
                     this.tasks = response.data.data
                     console.log(response);
@@ -149,6 +149,7 @@ export default {
         deleteTask(id) {
             axios.delete(`/api/tasks/${id}`)
                 .then(response => {
+                    console.log(response);
                     this.getTasks(this.category_id)
                 }).catch(err => console.log(err))
         },

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\CustomTask;
+namespace App\Http\Controllers\Task\AnotherActions;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
 
-class ChangeIsCompletedController extends Controller
+class TaskCompletedController extends Controller
 {
     public function __invoke($id)
     {
