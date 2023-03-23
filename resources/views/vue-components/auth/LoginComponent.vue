@@ -14,23 +14,25 @@
             </svg>
         </div>
 
-        <div class="mt-[100px] w-[300px] mx-auto re">
+        <div class="mt-[100px] w-[300px] mx-auto text-black">
             <div class="mb-5">
-                <input type="email" class="h-[2.5rem] p-2" placeholder="email@mail.ru">
+                <input v-model="email" type="email" class="h-[2.5rem] p-2" placeholder="email@mail.ru">
             </div>
             <div class="mb-5">
-                <input type="password" class="h-[2.5rem] p-2" placeholder="**********">
+                <input v-model="password" type="password" class="h-[2.5rem] p-2" placeholder="**********">
             </div>
 
             <div class="justify-self-center mb-5">
                 <router-link :to="{name: 'register'}">
-                    <button class="w-[250px] bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-8">I don't have an account
+                    <button class="w-[250px] bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-8">I don't have
+                        an account
                     </button>
                 </router-link>
             </div>
 
             <div class="justify-self-center">
-                <button class="w-[250px] bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-8">Sign in
+                <button @click.prevent="login"
+                        class="w-[250px] bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-8">Sign in
                 </button>
             </div>
 
@@ -41,8 +43,35 @@
 </template>
 
 <script>
+import router from "../../../js/router";
 export default {
-    name: "LoginComponent"
+    name: "LoginComponent",
+
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+
+    methods: {
+        login() {
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                // console.log(response);
+                // console.log(response.config.headers);
+                axios.post('/login', {email: this.email, password: this.password})
+                    .then(response => {
+                        console.log(response);
+                        localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
+                        router.push({name: 'profile'})
+                        // console.log("You are sign in");
+                        // console.log(response);
+                    }).catch(err => {
+                    console.log(err);
+                })
+            });
+        }
+    }
 }
 </script>
 

@@ -13,22 +13,22 @@
             </svg>
         </div>
 
-        <div class="mt-[100px] w-[300px] mx-auto re">
+        <div class="mt-[100px] w-[300px] mx-auto text-black">
 
             <div class="mb-5">
-                <input type="email" class="h-[2.5rem] p-2" placeholder="email@mail.ru">
+                <input v-model="email" type="email" class="h-[2.5rem] p-2" placeholder="email@mail.ru">
             </div>
 
             <div class="mb-5">
-                <input type="text" class="h-[2.5rem] p-2" placeholder="John">
+                <input v-model="name" type="text" class="h-[2.5rem] p-2" placeholder="John">
             </div>
 
             <div class="mb-5">
-                <input type="password" class="h-[2.5rem] p-2" placeholder="**********">
+                <input v-model="password" type="password" class="h-[2.5rem] p-2" placeholder="**********">
             </div>
 
             <div class="mb-5">
-                <input type="password" class="h-[2.5rem] p-2" placeholder="**********">
+                <input v-model="password_confirmation" type="password" class="h-[2.5rem] p-2" placeholder="**********">
             </div>
 
             <div class="justify-self-center mb-5">
@@ -39,7 +39,7 @@
             </div>
 
             <div class="justify-self-center">
-                <button class="w-[250px] bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-8">Sign up
+                <button @click.prevent="register" class="w-[250px] bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-8">Sign up
                 </button>
             </div>
 
@@ -50,8 +50,41 @@
 </template>
 
 <script>
+import router from "../../../js/router";
 export default {
-    name: "RegisterComponent"
+    name: "RegisterComponent",
+
+    data(){
+        return{
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: ''
+        }
+    },
+
+    methods: {
+        register(){
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.post('/register', {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password,
+                    password_confirmation: this.password_confirmation
+                })
+                    .then(res => {
+                        localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
+                        router.push({name: 'profile'})
+                        console.log("You are register");
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        console.log("Register error");
+                        console.log(err);
+                    })
+            });
+        }
+    }
 }
 </script>
 
