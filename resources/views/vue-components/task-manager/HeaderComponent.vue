@@ -1,5 +1,5 @@
 <template>
-    <div class="container bg-red-500 w-100 h-[172px] p-3 mb-[0.8rem] flex flex-col">
+    <div class="container bg-red-500 w-100 h-[192px] p-3 mb-[0.1rem] flex flex-col">
 
         <div class="flex flex-row justify-between mb-2">
 
@@ -17,10 +17,17 @@
         </div>
 
         <div class="flex flex-col">
-            <div class="mb-2"><h1 class="text-3xl text-white">Hello {{user_name}}!</h1></div>
+            <div class="mb-2"><h1 class="text-3xl text-white">Hello {{ user_name }}!</h1></div>
 
-            <div v-if="tasks_today > 0"><p class="bg-white p-1 w-auto">You have {{tasks_today}} new task today</p></div>
-            <div v-else><p class="bg-white p-1 w-auto">You don't have any tasks for today yet</p></div>
+            <div class="grid grid-cols-2 bg-white p-">
+                <div v-if="tasks_today > 0"><p class="p-1 w-auto">You have {{ tasks_today }} new task today</p>
+                </div>
+                <div v-else><p class="bg-white p-1 w-auto">You don't have any tasks for today yet</p></div>
+
+                <router-link :to="{name: 'statistics'}">
+                    <div class="mt-1 ml-36"><span class="text-red-500 font-semibold">Statistics</span></div>
+                </router-link>
+            </div>
 
         </div>
     </div>
@@ -65,7 +72,7 @@ export default {
             })
         },
 
-        getTasksToday(){
+        getTasksToday() {
             axios.get('/api/tasks/info/quantity_today')
                 .then(response => {
                     this.tasks_today = response.data

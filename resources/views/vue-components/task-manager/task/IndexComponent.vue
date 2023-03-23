@@ -20,7 +20,9 @@
         </div>
     </div>
 
-    <div class="mt-12 grid gap-10 overflow-y-auto h-[620px]">
+
+    <div
+        class="mt-12 grid gap-10 overflow-y-auto h-[620px]">
         <div v-for="task in tasks"
              class="bg-gray-200  w-[450px] h-[120px] mx-auto p-3 grid grid-cols-3 justify-items-center shadow-2xl">
             <div class="w-[130px]  truncate"><span>Task: <br> {{ task.name }}</span></div>

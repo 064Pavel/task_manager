@@ -45,6 +45,11 @@ const router = createRouter({
             component: () => import('../views/vue-components/task-manager/task/EditComponent.vue')
 
         },
+        {
+            path: '/statistics',
+            name: 'statistics',
+            component: () => import("../views/vue-components/task-manager/task/StatisticsComponent.vue")
+        }
 
     ]
 })

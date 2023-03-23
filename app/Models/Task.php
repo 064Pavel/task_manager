@@ -30,4 +30,5 @@ class Task extends Model
     {
         return $this->hasOne(Priority::class, 'id', 'priority_id');
     }
+
 }
